@@ -1,6 +1,7 @@
 import './App.css';
 import MovieCard, { MovieCardArrow } from './ReactEssencial/tier-1/MovieCard';
 import Profile from './ReactEssencial/tier-1/Profile';
+import MovieList from './ReactEssencial/tier-1/MovieList';
 
 const movies = [
   { title: 'Vertigo', rating: 5 },
@@ -65,6 +66,17 @@ function App() {
           <Profile />
         </article>
       </section>
+
+      <article className="card">
+        <div className="card__header">
+            <p className="eyebrow">Props</p>
+            <h2>MovieList passando movie/onLike/showRating</h2>
+        </div>
+        <MovieList
+          movies={movies}
+          onLike={(movie)=> console.log('Curti:',movie.title)}
+          showRating/>
+      </article>
     </div>
   );
 }
