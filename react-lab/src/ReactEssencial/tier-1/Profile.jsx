@@ -1,12 +1,12 @@
-const user = {
+const DEFAULT_USER = {
   name: 'Ada Lovelace',
   age: 17,
   isAdmin: true,
 };
 
-const favoriteMovies = ['Alien', 'Arrival', 'Interstellar'];
+const DEFAULT_FAVORITES = ['Alien', 'Arrival', 'Interstellar'];
 
-function Profile() {
+function Profile({ user = DEFAULT_USER, favoriteMovies = DEFAULT_FAVORITES }) {
   const { name, age, isAdmin } = user;
 
   return (

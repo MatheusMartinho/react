@@ -9,6 +9,12 @@ const movies = [
   { title: 'Everything Everywhere All at Once', rating: 5 },
 ];
 
+const users = [
+  {name: 'Matheus Moura Martino', age:26,isAdmin: true, favoriteMovies: ['teste1','teste2','teste3']},
+  {name: 'Manuela Moura Feitosa', age: 17, isAdmin: false, favoriteMovies: ['teste4','teste5','teste6']},
+  {name: 'Antonio', age: 17, isAdmin: true, favoriteMovies: ['teste7','teste8','teste9']}
+]
+
 function App() {
   return (
     <div className="page">
@@ -63,7 +69,9 @@ function App() {
             <p className="hint">Repare na condicional de admin, ternário de idade e map com key.</p>
           </div>
 
-          <Profile />
+          {users.map((u) => (
+            <Profile key={u.name} user={u} favoriteMovies={['Interstellar', 'Into the Wild','Godfather']} />
+          ))}
         </article>
       </section>
 
