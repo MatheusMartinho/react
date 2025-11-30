@@ -22,6 +22,10 @@ function App() {
   const handleAdd = () => setLikes((prev) => prev + 1);
   const handleReset = () => setLikes(0);
 
+  //Rating
+  let stars =[1,2,3,4,5];
+  const [rating, setRating] = useState(0);
+
   return (
     <div className="page">
       <header className="hero">
@@ -102,6 +106,27 @@ function App() {
           <CounterDisplay count={likes} />
         </div>
       </article>
+
+<article className="card">
+  <div className="card__header">
+    <p className="eyebrow">useState</p>
+    <h2>MovieRating (5 estrelas)</h2>
+  </div>
+
+  <div className="movie-rating">
+    {stars.map((star) => (
+      <button
+        key={star}
+        type="button"
+        className={star <= rating ? 'star star--active' : 'star'}
+        onClick={() => setRating(star)}
+      >
+        ★
+      </button>
+    ))}
+    <p>Você deu {rating} estrela(s)</p>
+  </div>
+</article>
     </div>
   );
 }
