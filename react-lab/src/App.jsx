@@ -2,6 +2,7 @@ import './App.css';
 import MovieCard, { MovieCardArrow } from './ReactEssencial/tier-1/MovieCard';
 import Profile from './ReactEssencial/tier-1/Profile';
 import MovieList from './ReactEssencial/tier-1/MovieList';
+import { useState } from 'react';
 
 const movies = [
   { title: 'Vertigo', rating: 5 },
@@ -10,12 +11,17 @@ const movies = [
 ];
 
 const users = [
-  {name: 'Matheus Moura Martino', age:26,isAdmin: true, favoriteMovies: ['teste1','teste2','teste3']},
-  {name: 'Manuela Moura Feitosa', age: 17, isAdmin: false, favoriteMovies: ['teste4','teste5','teste6']},
-  {name: 'Antonio', age: 17, isAdmin: true, favoriteMovies: ['teste7','teste8','teste9']}
-]
+  { name: 'Matheus Moura Martino', age: 26, isAdmin: true, favoriteMovies: ['teste1', 'teste2', 'teste3'] },
+  { name: 'Manuela Moura Feitosa', age: 17, isAdmin: false, favoriteMovies: ['teste4', 'teste5', 'teste6'] },
+  { name: 'Antonio', age: 17, isAdmin: true, favoriteMovies: ['teste7', 'teste8', 'teste9'] },
+];
 
 function App() {
+  
+  const [likes, setLikes] = useState(0);
+  const handleAdd = () => setLikes((prev) => prev + 1);
+  const handleReset = () => setLikes(0);
+
   return (
     <div className="page">
       <header className="hero">
@@ -77,16 +83,31 @@ function App() {
 
       <article className="card">
         <div className="card__header">
-            <p className="eyebrow">Props</p>
-            <h2>MovieList passando movie/onLike/showRating</h2>
+          <p className="eyebrow">Props</p>
+          <h2>MovieList passando movie/onLike/showRating</h2>
         </div>
+
         <MovieList
           movies={movies}
-          onLike={(movie)=> console.log('Curti:',movie.title)}
-          showRating/>
+          onLike={(movie) => console.log('Curti:', movie.title)}
+          showRating
+        />
+
+        <div className="stack">
+          <div className="button-row">
+            <button type="button" onClick={handleAdd}>+1 like</button>
+            <button type="button" onClick={handleReset}>Reset</button>
+          </div>
+
+          <CounterDisplay count={likes} />
+        </div>
       </article>
     </div>
   );
+}
+
+function CounterDisplay({ count }) {
+  return <p>Total likes compartilhados: {count}</p>;
 }
 
 export default App;
