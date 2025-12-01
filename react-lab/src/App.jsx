@@ -1,138 +1,63 @@
 import './App.css';
-import MovieCard, { MovieCardArrow } from './ReactEssencial/tier-1/MovieCard';
-import Profile from './ReactEssencial/tier-1/Profile';
-import MovieList from './ReactEssencial/tier-1/MovieList';
 import { useState } from 'react';
+import MovieCard from './ReactEssencial/tier-1/MovieCard';
+import MovieList from './ReactEssencial/tier-1/MovieList';
+import Profile from './ReactEssencial/tier-1/Profile';
 
 const movies = [
   { title: 'Vertigo', rating: 5 },
   { title: 'Interstellar', rating: 4 },
-  { title: 'Everything Everywhere All at Once', rating: 5 },
 ];
 
 const users = [
-  { name: 'Matheus Moura Martino', age: 26, isAdmin: true, favoriteMovies: ['teste1', 'teste2', 'teste3'] },
-  { name: 'Manuela Moura Feitosa', age: 17, isAdmin: false, favoriteMovies: ['teste4', 'teste5', 'teste6'] },
-  { name: 'Antonio', age: 17, isAdmin: true, favoriteMovies: ['teste7', 'teste8', 'teste9'] },
+  { name: 'Matheus', age: 26, isAdmin: true, favoriteMovies: ['Filme1', 'Filme2'] },
+  { name: 'Manuela', age: 17, isAdmin: false, favoriteMovies: ['Filme3', 'Filme4'] },
 ];
 
 function App() {
-  
   const [likes, setLikes] = useState(0);
-  const handleAdd = () => setLikes((prev) => prev + 1);
-  const handleReset = () => setLikes(0);
-
-  //Rating
-  let stars =[1,2,3,4,5];
   const [rating, setRating] = useState(0);
 
   return (
-    <div className="page">
-      <header className="hero">
-        <p className="eyebrow">Tier 1 · React Essencial</p>
-        <h1>Componentes + JSX, lado a lado</h1>
-        <p className="lede">
-          Painel rápido para revisar function vs arrow, chaves no JSX, lista com key e handlers.
-        </p>
+    <div>
+      <h1>Tier 1 - React</h1>
 
-        <div className="pill-row">
-          <span className="pill">Function vs Arrow</span>
-          <span className="pill">Listas com key</span>
-          <span className="pill">Condicionais</span>
-          <span className="pill">Eventos</span>
-        </div>
-      </header>
+      {/* MovieCard individual */}
+      <h2>MovieCard</h2>
+      {movies.map((movie) => (
+        <MovieCard key={movie.title} movie={movie} />
+      ))}
 
-      <section className="card-grid">
-        <article className="card">
-          <div className="card__header">
-            <p className="eyebrow">Componentes Funcionais</p>
-            <h2>MovieCard nos dois formatos</h2>
-            <p className="hint">Mesmo layout retornado por declaration e arrow.</p>
-          </div>
+      {/* MovieList */}
+      <h2>MovieList</h2>
+      <MovieList movies={movies} />
 
-          <div className="two-column">
-            <div className="column">
-              <h3>Function declaration</h3>
-              <div className="stack">
-                {movies.map((movie) => (
-                  <MovieCard key={`func-${movie.title}`} movie={movie} />
-                ))}
-              </div>
-            </div>
+      {/* Profile */}
+      <h2>Profile</h2>
+      {users.map((user) => (
+        <Profile key={user.name} user={user} />
+      ))}
 
-            <div className="column">
-              <h3>Arrow function</h3>
-              <div className="stack">
-                {movies.map((movie) => (
-                  <MovieCardArrow key={`arrow-${movie.title}`} movie={movie} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </article>
+      {/* Counter com useState */}
+      <h2>Counter</h2>
+      <p>Likes: {likes}</p>
+      <button onClick={() => setLikes(likes + 1)}>+1</button>
+      <button onClick={() => setLikes(0)}>Reset</button>
 
-        <article className="card">
-          <div className="card__header">
-            <p className="eyebrow">JSX (HTML + JS)</p>
-            <h2>Profile com chaves, ternário e lista</h2>
-            <p className="hint">Repare na condicional de admin, ternário de idade e map com key.</p>
-          </div>
-
-          {users.map((u) => (
-            <Profile key={u.name} user={u} favoriteMovies={['Interstellar', 'Into the Wild','Godfather']} />
-          ))}
-        </article>
-      </section>
-
-      <article className="card">
-        <div className="card__header">
-          <p className="eyebrow">Props</p>
-          <h2>MovieList passando movie/onLike/showRating</h2>
-        </div>
-
-        <MovieList
-          movies={movies}
-          onLike={(movie) => console.log('Curti:', movie.title)}
-          showRating
-        />
-
-        <div className="stack">
-          <div className="button-row">
-            <button type="button" onClick={handleAdd}>+1 like</button>
-            <button type="button" onClick={handleReset}>Reset</button>
-          </div>
-
-          <CounterDisplay count={likes} />
-        </div>
-      </article>
-
-<article className="card">
-  <div className="card__header">
-    <p className="eyebrow">useState</p>
-    <h2>MovieRating (5 estrelas)</h2>
-  </div>
-
-  <div className="movie-rating">
-    {stars.map((star) => (
-      <button
-        key={star}
-        type="button"
-        className={star <= rating ? 'star star--active' : 'star'}
-        onClick={() => setRating(star)}
-      >
-        ★
-      </button>
-    ))}
-    <p>Você deu {rating} estrela(s)</p>
-  </div>
-</article>
+      {/* Rating com useState */}
+      <h2>Rating</h2>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <button
+          key={star}
+          onClick={() => setRating(star)}
+          style={{ color: star <= rating ? 'gold' : 'gray' }}
+        >
+          ★
+        </button>
+      ))}
+      <p>{rating} estrela(s)</p>
     </div>
   );
-}
-
-function CounterDisplay({ count }) {
-  return <p>Total likes compartilhados: {count}</p>;
 }
 
 export default App;

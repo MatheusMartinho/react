@@ -1,35 +1,17 @@
-const DEFAULT_MOVIE = {
-  title: 'Vertigo',
-  rating: 5,
-};
+import { useState } from 'react';
 
-function MovieCard({ movie = DEFAULT_MOVIE, onLike = () => {}, showRating = true }) {
-  const { title, rating } = movie;
+function MovieCard({ movie }) {
+  const [isLiked, setIsLiked] = useState(false);
 
   return (
-    <article className="movie-card">
-      <h3>{title}</h3>
-      {showRating && <p>Rating: {rating}</p>}
-      <button type="button" onClick={() => onLike(movie)}>
-        Curtir
+    <div>
+      <h3>{movie.title}</h3>
+      <p>Rating: {movie.rating}</p>
+      <button onClick={() => setIsLiked(!isLiked)}>
+        {isLiked ? '❤️' : '🤍'}
       </button>
-    </article>
+    </div>
   );
 }
 
-const MovieCardArrow = ({ movie = DEFAULT_MOVIE, onLike = () => {}, showRating = true }) => {
-  const { title, rating } = movie;
-
-  return (
-    <article className="movie-card movie-card--arrow">
-      <h3>{title}</h3>
-      {showRating && <p>Rating: {rating}</p>}
-      <button type="button" onClick={() => onLike(movie)}>
-        Curtir
-      </button>
-    </article>
-  );
-};
-
-export { MovieCardArrow };
 export default MovieCard;

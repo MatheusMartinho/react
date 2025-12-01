@@ -18,13 +18,7 @@
   2. Reescreva qualquer template estático em JSX válido (inclua comentários `{/* ... */}`).
   3. Diagnostic: pegue um bug comum (usar `class`) e corrija.
 
-## 3. Props
-- **Resumo:** dados fluem de pai → filho. Desestruture no parâmetro e defina defaults.
-- **Checklist:** nunca passar setState pros filhos, nomes semânticos, `PropTypes`/TS opcional.
-- **Exercícios:**
-  1. `MovieList` renderiza `MovieCard` com `movie`, `onLike` e `showRating` default true.
-  2. Adicione um contador no pai e passe somente o valor pro filho (sem fornecer o setter).
-  3. Crie um componente que aceita `children` e componha com outros 2 componentes.
+
 
 ## 4. useState
 - **Resumo:** par `[valor, setValor]` causa re-render ao atualizar. Nunca muta diretamente.
