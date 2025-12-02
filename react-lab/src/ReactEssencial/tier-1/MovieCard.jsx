@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function MovieCard({ movie }) {
+function MovieCard({movie}){
   const [isLiked, setIsLiked] = useState(false);
 
   return (
